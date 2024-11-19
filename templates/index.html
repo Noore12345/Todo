@@ -1,0 +1,52 @@
+{% extends "Base.html" %}
+{% block body %}
+  <body>
+      <div class="container my-3">
+        <h4>Add Todo</h4>
+        <form action='/' method="POST">
+            <div class="mb-3">
+              <label for="title" class="form-label">Todo Tittle</label>
+              <input type="text" class="form-control" name='title' id="title" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="desc" class="form-label">Todo Dicription</label>
+              <input type="text" class="form-control" name="desc" id="desc">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+      </div>
+      <div class="container my-3">
+
+        {% if tudoes | length==0%}
+         <div class="alert alert-dark" role="alert">
+           No todos found. Add Your first Todo
+         </div>
+         {% else %}
+         <h4>All Todo</h4>
+         <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Sl.No</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in tudoes %}
+              <tr>
+                
+                <th scope="row">{{loop.index}}</th>
+                <td>{{i.title}}</td>
+                <td>{{i.desc}}</td>
+                <td>{{i.date_created}}</td>
+                <td><a href="/update/{{i.sno}}" type="button" class="btn btn-outline-success mx-1">Update</button></td>
+                <td><a href="/delete/{{i.sno}}" type="button" class="btn btn-outline-danger mx-1">Delete</button></td>
+              </tr>
+              {% endfor %}
+            </table>
+              {% endif %}
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    {% endblock body %}
